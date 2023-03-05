@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<center>
+	<h2>register Customer</h2>
+
+	<form th:action="@{/addcustomer}" th:method="post" th:object="${customer}">
+		<table border="1">
+			<tr>
+				<td>First Name</td>
+				<td><input type="text" th:field="${customer.firstName}"></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input type="text" th:field="${customer.lastName}"></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="email" th:field="${customer.email}"></td>
+			</tr>
+			<tr>
+				<td>Book Selected By Customer</td>
+				<td>
+					<select th:field="${customer.bookName}">
+					    <option th:value="NULL" th:text="'Not Selected'"></option>				
+					    <option th:each="book : ${books}" th:value="${book.title}" th:text="${book.title}"></option>
+					</select>
+				</td>				
+			</tr>
+			<tr>
+				<td colspan="2"><button type="submit">Add Customer</button></td>
+			</tr>
+			
+
+		</table>
+	</form>
+
+</body>
+</html>

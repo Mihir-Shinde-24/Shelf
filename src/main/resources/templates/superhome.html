@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>super admin</h2>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>name</th>
+				<th>Email</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="admin : ${admins}">
+				<td th:text="${admin.id}"></td>
+				<td th:text="${admin.name}"></td>
+				<td th:text="${admin.email}"></td>
+				<td><a th:href="@{/updateadmin/}+${admin.id}"><button>Update</button></a>
+				</td>
+				<td>
+					<form th:action="@{/delete/}+${admin.id}" th:method="delete">
+						<button type="submit">Delete</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

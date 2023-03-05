@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<center>
+<h2>admin home</h2>
+
+<h3>Book Details</h3>
+<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Is Available?</th>
+				<th>Customer Email</th>
+				<th>Update</th>
+				<th>Delete</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="book : ${books}">
+				<td th:text="${book.id}"></td>
+				<td th:text="${book.title}"></td>
+				<td th:text="${book.description}"></td>
+				<td th:text="${book.price}"></td>
+				<td th:text="${book.isAvailable} ? 'Yes' : 'No'"></td>
+				<td th:text="${book.customerEmail} == NULL ? 'Nil' : ${book.customerEmail} "></td>
+				
+				<td>
+					<a th:href="@{/updatebook/}+${book.id}"><button>Update</button></a>
+				</td>
+				<td>
+					<form th:action="@{/deletebook/}+${book.id}" th:method="delete">
+						<button type="submit">Delete</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+<!-- 	Customer Details -->
+<h3>Customer Details</h3>
+<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Has Taken Any Book?</th>
+				<th>Book Selected</th>
+				<th>Update</th>
+				<th>Delete</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="customer : ${customers}">
+				<td th:text="${customer.id}"></td>
+				<td th:text="${customer.firstName}"></td>
+				<td th:text="${customer.lastName}"></td>
+				<td th:text="${customer.email}"></td>
+				<td th:text="${customer.hasTakenBook} ? 'Yes' : 'No'"></td>
+				<td th:text="${customer.bookName} == '' ? 'Nil' : ${customer.bookName} "></td>
+				
+				<td>
+					<a th:href="@{/updatecustomer/}+${customer.id}"><button>Update</button></a>
+				</td>
+				<td>
+					<form th:action="@{/deletecustomer/}+${customer.id}" th:method="delete">
+						<button type="submit">Delete</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<center>
+	<h2>update book</h2>
+
+	<form th:action="@{/editbook/}+${book.id}" th:method="put" th:object="${book}">
+		<table border="1">
+			<tr>
+				<td>Title</td>
+				<td><input type="text" th:field="*{title}"></td>
+			</tr>
+			 <tr>
+				<td>Description</td>
+				<td><input type="text" th:field="*{description}"></td>
+			</tr>
+			<tr>
+				<td>Price</td>
+				<td><input type="number" th:field="*{price}"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2"><button type="submit">Update Book</button></td>
+			</tr>
+			
+
+		</table>
+	</form>
+
+</body>
+</html>
