@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itvedant.exceptions.CustomerDBException;
+import com.itvedant.models.Book;
 import com.itvedant.models.Customer;
+import com.itvedant.repositories.BookRepo;
 import com.itvedant.repositories.CustomerRepo;
 
 @Service
@@ -15,25 +17,35 @@ public class CustomerService implements CustomerServiceInterf {
 
 	@Autowired
 	CustomerRepo repo;
+	
+	@Autowired
+	BookRepo bookRepo;
 
 	@Override
 	public void addCustomer(Customer newCustomer)
 	{
 		Optional<Customer> customer = repo.findByEmail(newCustomer.getEmail());
 
-		System.out.println(newCustomer.getBookName().isBlank());
-
-		
 		if(customer.isEmpty())
 		{
 			if (newCustomer.getBookName().isBlank())
 			{
 				newCustomer.setHasTakenBook(false);
+				
+//				Optional<Book> book = bookRepo.findByTitle(newCustomer.getBookName());
+//				
+//				book.get().setAvailable(true);
+//				book.get().setCustomerEmail(null);
 			}
 			else
 			{
-				newCustomer.setHasTakenBook(true);
-
+				newCustomer.setHasTakenBook(true);				
+				Optional<Book> book = bookRepo.findByTitle(newCustomer.getBookName());
+				
+				book.get().setAvailable(false);
+				book.get().setCustomerEmail(newCustomer.getEmail());
+				
+				bookRepo.save(book.get());
 			}
 			
 			repo.save(newCustomer);			
@@ -61,11 +73,24 @@ public class CustomerService implements CustomerServiceInterf {
 			if (newCustomer.getBookName().isBlank())
 			{
 				newCustomer.setHasTakenBook(false);
+				
+				if(customer.get().isHasTakenBook())
+				{
+					Optional<Book> book = bookRepo.findByTitle(customer.get().getBookName());
+					book.get().setAvailable(true);
+					book.get().setCustomerEmail(null);
+				}
+				
 			}
 			else
 			{
 				newCustomer.setHasTakenBook(true);
-
+				
+				Optional<Book> book = bookRepo.findByTitle(newCustomer.getBookName());
+				
+				book.get().setAvailable(false);
+				book.get().setCustomerEmail(newCustomer.getEmail());
+				bookRepo.save(book.get());
 			}
 			
 			repo.save(newCustomer);			

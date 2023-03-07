@@ -1,5 +1,7 @@
 package com.itvedant.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.itvedant.models.Book;
+import com.itvedant.models.Customer;
 import com.itvedant.services.BookServiceInterf;
 
 @Controller
@@ -20,6 +23,16 @@ public class BookController {
 	BookServiceInterf service;
 	
 	/* Web Page mappings */
+	
+	@GetMapping({"/","/home"})
+	public String homepage(Model model)
+	{
+
+		List<Book> books = service.getBooks();
+		
+		model.addAttribute("books",books);
+		return "home.html";
+	}
 	
 	@GetMapping("/registerbook")
 	public String registerBook(Model model)

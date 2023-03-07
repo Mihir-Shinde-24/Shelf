@@ -55,7 +55,7 @@ public class SuperAdminController {
 		newAdmin.setRole("ROLE_ADMIN");
 		service.addAdmin(newAdmin);
 
-		return "superhome.html";
+		return "redirect:/superhome";
 	}
 	
 	@PutMapping("/update/{id}")
