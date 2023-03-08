@@ -64,6 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.PUT,"/editbook/**").hasAnyRole("SUPER","ADMIN")
 			.antMatchers(HttpMethod.DELETE,"/deletebook/**").hasAnyRole("SUPER","ADMIN")
 			
+			.antMatchers("/css/**").permitAll()
+			.antMatchers("/images/**").permitAll()
 			.anyRequest()
 			.authenticated()
 			.and()

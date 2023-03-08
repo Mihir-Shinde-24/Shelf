@@ -27,8 +27,7 @@ public class BookServices implements BookServiceInterf{
 	{
 		newBook.setAvailable(true);
 		newBook.setCustomerEmail(null);
-		repo.save(newBook);
-		
+		repo.save(newBook);		
 	}
 
 	@Override

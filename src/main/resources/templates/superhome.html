@@ -1,37 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  <link rel="stylesheet" th:href="@{/css/superhome.css}" />
+   <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/color/48/null/open-book--v1.png">
+   <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/color/48/null/open-book--v1.png">
+  <title>Super Admin Home</title>
 </head>
 <body>
-	<h2>super admin</h2>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark ms-auto py-1" >
+    <div class="container" >
+      <a class="navbar-brand fw-bold fs-4 " th:href="@{/default}">Shelf Super 📔</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-lg-0 ms-auto ">
+          <li class="nav-item  d-flex align-items-center">
+            <a class="nav-link active" aria-current="page" th:href="@{/default}">Dashboard</a>
+          </li>
+          <li class="nav-item  d-flex align-items-center">
+            <a class="nav-link" aria-current="page" th:href="@{/registercustomer}">Register User</a>
+          </li>
+          <li class="nav-item  d-flex align-items-center">
+            <a class="nav-link" th:href="@{/registeradmin}">Register Admin</a>
+          </li>
+          <li class="nav-item d-flex align-items-center">
+            <a class="nav-link " th:href="@{/registerbook}">Register Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/logout}"><button class="btn btn-light">Logout</button></a>
+          </li>
 
-	<table border="1">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>name</th>
-				<th>Email</th>
-				<th>Update</th>
-				<th>Delete</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="admin : ${admins}">
-				<td th:text="${admin.id}"></td>
-				<td th:text="${admin.name}"></td>
-				<td th:text="${admin.email}"></td>
-				<td><a th:href="@{/updateadmin/}+${admin.id}"><button>Update</button></a>
-				</td>
-				<td>
-					<form th:action="@{/delete/}+${admin.id}" th:method="delete">
-						<button type="submit">Delete</button>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+
+  <!-- Tables section -->
+
+  <div class="table-section mb-5">
+    <div class="container">
+      <div class="tables">
+        <h1 class="heading">&nbsp;Welcome Super Admin!</h1>
+
+        <!-- Admin Details -->
+        <div class="admin-table table-responsive mt-4 ">
+          
+          <h3 class="title mb-3">Admin Details</h3>
+
+          <table class="table table-light table-striped table-hover" >
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <!-- <th scope="col">Update</th> -->
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="align-text-bottom" th:each="admin : ${admins}" th:if="${admin.email} != 'super@admin.com'">
+                <th scope="row" th:text="${admin.id}">1</th>
+                <td  th:text="${admin.name}">Mark</td>
+                <td th:text="${admin.email}">Otto@mark.com</td>
+                <!-- <td>
+                  <a th:href="@{/updateadmin/}+${admin.id}"><button class="btn btn-warning text-light">Update</button></a>
+                  </td> -->
+                <td>
+                  <form th:action="@{/delete/}+${admin.id}" th:method="delete">
+                    <button type="submit" class="btn btn-danger text-light">Delete</button>
+                  </form>
+                </td>
+                
+              </tr>
+              
+            </tbody>
+          </table>
+
+        </div>
+
+        <!-- Book Details -->
+        <div class="book-table table-responsive mt-5">
+          <h3 class="title mb-3">Book Details</h3>
+
+          <table class="table table-light table-striped table-hover" >
+            <thead class="table-dark ">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Availability</th>
+                <th scope="col">Bearer Email</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="align-text-bottom" th:each="book : ${books}">
+                <th scope="row" th:text="${book.id}">1</th>
+                <td th:text="${book.title}">Spiderman</td>
+                <td th:text="${book.description}">Marvel</td>
+                <td th:text="${book.price}">100</td>
+                <td th:text="${book.isAvailable} ? 'Yes' : 'No'">Yes</td>
+                <td th:text="${book.customerEmail} == NULL ? 'Nil' : ${book.customerEmail} ">Dummy@gmail.com</td>
+                <td>
+                	<a th:href="@{/updatebook/}+${book.id}"><button class="btn btn-warning text-light">Update</button></a>
+                </td>
+                <td>
+                	<form th:action="@{/deletebook/}+${book.id}" th:method="delete">
+						<button type="submit"  class="btn btn-danger text-light" th:disabled="${!book.isAvailable}">Delete</button>
 					</form>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+                </td>
+                
+              </tr>
+              
+            </tbody>
+          </table>
 
+        </div>
+
+            <!-- Customer Details -->
+            <div class="customer-table table-responsive mt-5">
+              <h3 class="title mb-3">Customer Details</h3>
+    
+              <table class="table table-light table-striped table-hover" >
+                <thead class="table-dark ">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Has Taken Book?</th>
+                    <th scope="col">Book Selected</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="align-text-bottom" th:each="customer : ${customers}">
+                    <th scope="row" th:text="${customer.id}">1</th>
+                    <td th:text="${customer.firstName}">ram</td>
+                    <td th:text="${customer.lastName}">mar</td>
+                    <td th:text="${customer.email}">ram@gmail.com</td>
+                    <td th:text="${customer.hasTakenBook} ? 'Yes' : 'No'">Yes</td>
+                    <td th:text="${customer.bookName} == '' ? 'Nil' : ${customer.bookName} ">Spiderman</td>               
+                    <td>
+						<a th:href="@{/updatecustomer/}+${customer.id}"><button class="btn btn-warning text-light">Update</button></a>
+					</td>
+					<td>
+						<form th:action="@{/deletecustomer/}+${customer.id}" th:method="delete">
+							<button type="submit" class="btn btn-danger text-light" th:disabled="${customer.hasTakenBook}">Delete</button>
+						</form>
+					</td>
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+    
+            </div>
+
+      </div>
+    </div>
+  </div>
+
+  
+  
 </body>
 </html>

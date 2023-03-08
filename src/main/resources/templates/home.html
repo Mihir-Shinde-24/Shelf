@@ -1,34 +1,102 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<center>
-<h2>homepage</h2>
+<!doctype html>
+<html lang="en">
 
-<h3>Book Details</h3>
-<table border="1">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Title</th>
-				<th>Description</th>
-				<th>Price</th>
-				<th>Is Available?</th>			
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="book : ${books}">
-				<td th:text="${book.id}"></td>
-				<td th:text="${book.title}"></td>
-				<td th:text="${book.description}"></td>
-				<td th:text="${book.price}"></td>
-				<td th:text="${book.isAvailable} ? 'Yes' : 'No'"></td>
-			</tr>
-		</tbody>
-	</table>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome to Shelf</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />  
+
+   <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/color/48/null/open-book--v1.png">
+</head>
+
+<body>
+
+  <!-- Main section -->
+  <div class="main ">
+
+    <div class="container">
+      <div class="navbar">
+
+        <span class="logo"><a th:href="@{/}">Shelf</a></span>
+        <ul class="nav-items">
+          <li><a th:href="@{/}">Home</a></li>
+          <li><a th:href="@{#book-section}">Books</a></li>
+          <li><a th:href="@{/}">About Us</a></li>
+          <li><a th:href="@{/}">Contact Us</a></li>
+          <li >
+          	<a th:href="@{/login}">
+          		<button class="button-59" role="button">Login</button>
+			</a>
+		</li>
+
+        </ul>
+      </div>
+
+      <div class="hero">
+        <div class="left">
+          <h1>Welcome to <span class="shelf">Shelf</span></h1>
+          <div class="quote">
+            <h2>“A room without books is like a body without a soul.”</h2>
+            <span>― Marcus Tullius Cicero</span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Books Section -->
+  <div class="book-section" id="book-section">
+
+    <div class="container">
+
+      <div class="books">
+
+
+        <h1 class="title">Featured Books</h1>
+        <h2>Trending Collection Best Sellers</h2>
+		
+        <div class="row">
+
+          <div class="card" th:each="book : ${books}">
+            <div class="card-header ">
+              <h1 th:text="${book.title}" >Harry Potter</h1>
+            </div>
+            <div class="card-body">
+            <h3 th:text="${book.title}">Harry Potter</h3>
+              <p  th:text="${book.description}">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi neque molestiae eius explicabo mollitia
+                tempore reiciendis, vel, sequi.
+              </p>
+              <div class="card-footer">
+                <span class="price footer-item">
+                  <i class="fa fa-dollar"></i>
+                  <span th:text="${book.price}">12</span>
+                </span>
+                <span class="available footer-item">
+                  <i class="fa fa-box-open"></i>
+                  <span th:text="${book.isAvailable} ? 'Available' : 'Out of Stock'" >Out of Stock</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
 
 </body>
+
 </html>
