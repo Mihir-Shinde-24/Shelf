@@ -19,15 +19,16 @@ public class Customer {
 	int id;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "First Name can't be Blank")
 	String firstName;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "Last Name can't be Blank")
 	String lastName;
 	
 	@Column
-	@Email
+	@NotBlank(message = "Email can't be Blank")
+	@Email(message = "Invalid Email")
 	String email;
 	
 	@Column

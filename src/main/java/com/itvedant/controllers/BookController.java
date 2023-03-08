@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,8 +61,14 @@ public class BookController {
 	/* CRUD Mappings */
 	
 	@PostMapping("/addbook")
-	public String addBook(@ModelAttribute("book") @Valid Book newBook, HttpServletRequest request)
+	public String addBook(HttpServletRequest request ,@ModelAttribute("book") @Valid Book newBook, BindingResult result)
 	{
+		
+		if(result.hasErrors())
+		{
+			return "registerbook.html";
+		}
+		
 		service.addBook(newBook);
 		
 		if(request.isUserInRole("SUPER"))
@@ -78,8 +85,14 @@ public class BookController {
 	}
 	
 	@PutMapping("/editbook/{id}")
-	public String editBook(@PathVariable("id") int id,@ModelAttribute("book") @Valid Book newBook, HttpServletRequest request)
+	public String editBook(HttpServletRequest request, @PathVariable("id") int id, @ModelAttribute("book") @Valid Book newBook,BindingResult result )
 	{
+		if(result.hasErrors())
+		{
+			return "updatebook.html";
+		}
+		
+		
 		Book book = service.getBookById(id);
 		
 		newBook.setAvailable(book.isAvailable());

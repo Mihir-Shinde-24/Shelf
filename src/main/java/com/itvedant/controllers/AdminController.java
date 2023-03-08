@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -73,8 +74,16 @@ public class AdminController {
 	/* CRUD Mapping */
 	
 	@PostMapping("/addcustomer")
-	public String addCustomer(@ModelAttribute("customer") @Valid Customer newCustomer, HttpServletRequest request)
+	public String addCustomer(HttpServletRequest request,@ModelAttribute @Valid Customer newCustomer,  BindingResult result, Model model )
 	{
+		List<Book> books = bookService.getBooks();
+		model.addAttribute("books",books);
+		
+		if(result.hasErrors())
+		{
+			return "registercustomer.html";
+		}
+		
 		customerService.addCustomer(newCustomer);				
 		
 		if(request.isUserInRole("SUPER"))
@@ -91,8 +100,18 @@ public class AdminController {
 	}
 	
 	@PutMapping("/editcustomer/{id}")
-	public String editCustomer(@ModelAttribute("customer") @Valid Customer newCustomer, HttpServletRequest request)
+	public String editCustomer( HttpServletRequest request , @ModelAttribute @Valid Customer newCustomer, BindingResult result, Model model)
 	{
+		List<Book> books = bookService.getBooks();
+		model.addAttribute("books",books);
+		
+		if(result.hasErrors())
+		{
+			return "updatecustomer.html";
+		}
+		
+		
+		
 		customerService.updateCustomer(newCustomer);	
 		
 		if(request.isUserInRole("SUPER"))

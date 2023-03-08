@@ -25,15 +25,16 @@ public class Admin implements UserDetails{
 	private int id;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "Name can't be Blank")
 	private String name;
 	
 	@Column
-	@Email
+	@Email(message = "Invalid Email")
+	@NotBlank(message = "Email can't be Blank")
 	private String email;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "Password can't be Blank")
 	private String passcode;
 	
 	@Column

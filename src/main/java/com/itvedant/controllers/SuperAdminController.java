@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -74,8 +75,13 @@ public class SuperAdminController {
 
 	/* CRUD Mapping */
 	@PostMapping("/addadmin")
-	public String addAdmin(@ModelAttribute("admin") @Valid Admin newAdmin)
+	public String addAdmin(@ModelAttribute("admin") @Valid Admin newAdmin,BindingResult result )
 	{
+		if(result.hasErrors())
+		{
+			return "registeradmin.html";
+		}
+		
 		newAdmin.setPasscode(encoder.encode(newAdmin.getPasscode()));
 		newAdmin.setRole("ROLE_ADMIN");
 		service.addAdmin(newAdmin);

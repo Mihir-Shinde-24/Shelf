@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -18,15 +19,16 @@ public class Book {
 	int id;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "Title can't be Blank" )	
 	String title;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "Description can't be Blank")
+	@Size(max = 254, message = "Length should be less than 255 letters")
 	String description;
 	
 	@Column
-	@Min(value = 100)
+	@Min(value = 100, message = "Price must be greater than or equal to 100")
 	double price;
 	
 	@Column
