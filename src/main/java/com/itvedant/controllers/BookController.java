@@ -2,6 +2,9 @@ package com.itvedant.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,14 +60,25 @@ public class BookController {
 	/* CRUD Mappings */
 	
 	@PostMapping("/addbook")
-	public String addBook(@ModelAttribute Book newBook)
+	public String addBook(@ModelAttribute("book") @Valid Book newBook, HttpServletRequest request)
 	{
 		service.addBook(newBook);
-		return "redirect:/adminhome";
+		
+		if(request.isUserInRole("SUPER"))
+		{
+			return "redirect:/superhome";
+		}
+		else if(request.isUserInRole("ADMIN"))
+		{
+			return "redirect:/adminhome";
+		}
+		else {
+			return "redirect:/";
+		}
 	}
 	
 	@PutMapping("/editbook/{id}")
-	public String editBook(@PathVariable("id") int id,@ModelAttribute Book newBook)
+	public String editBook(@PathVariable("id") int id,@ModelAttribute("book") @Valid Book newBook, HttpServletRequest request)
 	{
 		Book book = service.getBookById(id);
 		
@@ -72,15 +86,36 @@ public class BookController {
 		newBook.setCustomerEmail(book.getCustomerEmail());
 		
 		service.updateBook(newBook);
-		return "redirect:/adminhome";
+		
+		if(request.isUserInRole("SUPER"))
+		{
+			return "redirect:/superhome";
+		}
+		else if(request.isUserInRole("ADMIN"))
+		{
+			return "redirect:/adminhome";
+		}
+		else {
+			return "redirect:/";
+		}
 	}
 	
 	@DeleteMapping("/deletebook/{id}")
-	public String delete(@PathVariable("id") int id)
+	public String delete(@PathVariable("id") int id, HttpServletRequest request)
 	{
 		service.deleteBook(id);
 
-		return "redirect:/adminhome";
+		if(request.isUserInRole("SUPER"))
+		{
+			return "redirect:/superhome";
+		}
+		else if(request.isUserInRole("ADMIN"))
+		{
+			return "redirect:/adminhome";
+		}
+		else {
+			return "redirect:/";
+		}
 	}
 	
 	

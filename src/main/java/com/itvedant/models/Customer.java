@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table
@@ -17,12 +19,15 @@ public class Customer {
 	int id;
 	
 	@Column
+	@NotBlank
 	String firstName;
 	
 	@Column
+	@NotBlank
 	String lastName;
 	
 	@Column
+	@Email
 	String email;
 	
 	@Column

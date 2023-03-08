@@ -2,7 +2,11 @@ package com.itvedant.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +34,9 @@ public class SuperAdminController {
 	
 	@Autowired
 	CustomerServiceInterf customerService;
+	
+	@Autowired
+	PasswordEncoder encoder;
 
 	/* Web Page Mapping */
 
@@ -38,8 +45,6 @@ public class SuperAdminController {
 	{
 		Admin admin = new Admin();
 		model.addAttribute("admin", admin);
-		
-		
 
 		return "registeradmin.html";
 	}
@@ -69,8 +74,9 @@ public class SuperAdminController {
 
 	/* CRUD Mapping */
 	@PostMapping("/addadmin")
-	public String addAdmin(@ModelAttribute("admin") Admin newAdmin)
+	public String addAdmin(@ModelAttribute("admin") @Valid Admin newAdmin)
 	{
+		newAdmin.setPasscode(encoder.encode(newAdmin.getPasscode()));
 		newAdmin.setRole("ROLE_ADMIN");
 		service.addAdmin(newAdmin);
 
@@ -78,8 +84,9 @@ public class SuperAdminController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public String update(@ModelAttribute("admin") Admin newAdmin)
+	public String update(@ModelAttribute("admin") @Valid Admin newAdmin)
 	{
+		newAdmin.setPasscode(encoder.encode(newAdmin.getPasscode()));
 		newAdmin.setRole("ROLE_ADMIN");
 		service.updateAdmin(newAdmin);
 
@@ -93,5 +100,28 @@ public class SuperAdminController {
 
 		return "redirect:/superhome";
 	}
+	
+	
+	
+	
+	/* Role Based Redirection for Home Page */
+	
+	@GetMapping("/default")
+	public String successPage(HttpServletRequest request)	
+	{
+		if(request.isUserInRole("SUPER"))
+		{
+			return "redirect:/superhome";
+		}
+		else if(request.isUserInRole("ADMIN"))
+		{
+			return "redirect:/adminhome";
+		}
+		else {
+			return "redirect:/";
+		}
+	}
+	
+	
 
 }

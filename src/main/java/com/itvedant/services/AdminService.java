@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.itvedant.exceptions.AdminDBException;
@@ -11,7 +14,7 @@ import com.itvedant.models.Admin;
 import com.itvedant.repositories.AdminRepo;
 
 @Service
-public class AdminService implements AdminServiceInterf{
+public class AdminService implements AdminServiceInterf, UserDetailsService{
 
 	@Autowired
 	AdminRepo repo;
@@ -54,6 +57,14 @@ public class AdminService implements AdminServiceInterf{
 	public void deleteById(int id)
 	{
 		repo.deleteById(id);
+	}
+
+	/* Auth Methods */
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
+	{
+		return repo.findByEmail(username).get();
 	}
 
 }

@@ -2,6 +2,9 @@ package com.itvedant.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,24 +73,57 @@ public class AdminController {
 	/* CRUD Mapping */
 	
 	@PostMapping("/addcustomer")
-	public String addCustomer(@ModelAttribute Customer newCustomer)
+	public String addCustomer(@ModelAttribute("customer") @Valid Customer newCustomer, HttpServletRequest request)
 	{
-		customerService.addCustomer(newCustomer);		
-		return "redirect:/adminhome";
+		customerService.addCustomer(newCustomer);				
+		
+		if(request.isUserInRole("SUPER"))
+		{
+			return "redirect:/superhome";
+		}
+		else if(request.isUserInRole("ADMIN"))
+		{
+			return "redirect:/adminhome";
+		}
+		else {
+			return "redirect:/";
+		}
 	}
 	
 	@PutMapping("/editcustomer/{id}")
-	public String editCustomer(@ModelAttribute Customer newCustomer)
+	public String editCustomer(@ModelAttribute("customer") @Valid Customer newCustomer, HttpServletRequest request)
 	{
-		customerService.updateCustomer(newCustomer);		
-		return "redirect:/adminhome";
+		customerService.updateCustomer(newCustomer);	
+		
+		if(request.isUserInRole("SUPER"))
+		{
+			return "redirect:/superhome";
+		}
+		else if(request.isUserInRole("ADMIN"))
+		{
+			return "redirect:/adminhome";
+		}
+		else {
+			return "redirect:/";
+		}
 	}
 	
 	@DeleteMapping("/deletecustomer/{id}")
-	public String deleteCustomer(@PathVariable int id)
+	public String deleteCustomer(@PathVariable int id, HttpServletRequest request)
 	{
 		customerService.deleteCustomer(id);
-		return "redirect:/adminhome";
+		
+		if(request.isUserInRole("SUPER"))
+		{
+			return "redirect:/superhome";
+		}
+		else if(request.isUserInRole("ADMIN"))
+		{
+			return "redirect:/adminhome";
+		}
+		else {
+			return "redirect:/";
+		}
 	}
 
 }

@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table
@@ -16,12 +18,15 @@ public class Book {
 	int id;
 	
 	@Column
+	@NotBlank
 	String title;
 	
 	@Column
+	@NotBlank
 	String description;
 	
 	@Column
+	@Min(value = 100)
 	double price;
 	
 	@Column
