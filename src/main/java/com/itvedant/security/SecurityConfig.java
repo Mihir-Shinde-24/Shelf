@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
-		http.csrf().disable()
+		http
 			.authorizeRequests()
 			.antMatchers(HttpMethod.GET,"/superhome").hasAnyRole("SUPER")
 			.antMatchers(HttpMethod.GET,"/registeradmin").hasAnyRole("SUPER")
@@ -64,6 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.PUT,"/editbook/**").hasAnyRole("SUPER","ADMIN")
 			.antMatchers(HttpMethod.DELETE,"/deletebook/**").hasAnyRole("SUPER","ADMIN")
 			
+			.anyRequest()
+			.authenticated()
 			.and()
 			.formLogin()
 			.defaultSuccessUrl("/default", true);
