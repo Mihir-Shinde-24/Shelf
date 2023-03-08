@@ -1,0 +1,298 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200&display=swap')
+	;
+
+html {
+	scroll-behavior: smooth;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+}
+
+body {
+	background-color: #eef5fb;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+/* navbar */
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 75px;
+}
+
+.logo {
+	font-size: 35px;
+	font-weight: 600;
+}
+
+.logo a {
+	color: #f1f5fa;
+}
+
+.nav-items {
+	display: flex;
+	font-size: 17px;
+	align-items: center;
+}
+
+.nav-items li {
+	list-style: none;
+	padding-left: 15px;
+}
+
+.nav-items li a {
+	color: #edf2f6;
+}
+
+.nav-items .login-btn {
+	padding: 3px 10px;
+	border-radius: 16px;
+	/* Created with https://www.css-gradient.com */
+	background: #631717;
+	background: linear-gradient(to top, #631717 0%, #820D0B 100%);
+
+
+	font-size: 16px;
+	color: #f8f1f1;
+	
+	
+	
+}
+
+.nav-items li a:hover {
+	color: #e00a0a;
+}
+
+
+
+/* CSS */
+.button-59 {
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid white;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-size: 16px;
+  font-weight: 500;
+  height: 38px;
+  justify-content: center;
+  letter-spacing: -.5px;
+  line-height: 24px;
+  min-width: 95px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 12px;
+}
+
+.button-59:focus {
+  color: #171e29;
+}
+
+.button-59:hover {
+  border-color: #cc0000;
+  color: #cc0000;
+  fill: #cc0000;
+}
+
+.button-59:active {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+@media (min-width: 768px) {
+  .button-59 {
+    min-width: 81px;
+  }
+}
+
+/* main section */
+.main {
+	background-image: url("/images/header.jpg");
+	height: 100vh;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	width: 85%;
+	height: 100%;
+}
+
+/* hero */
+.hero {
+	color: #dee5eb;
+	height: calc(100% - 50px);
+	display: flex;
+}
+
+.hero .left {
+	width: 45%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.hero .left h1 {
+	color: #f1f5fa;
+	font-size: 50px;
+	font-weight: 500;
+}
+
+.hero .left .shelf {
+	color: #e00a0a;
+	font-weight: 700;
+}
+
+.hero .left .quote h2 {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+/* books section */
+.book-section {
+	height: auto;
+	background-color: #eef5fb;
+	display: flex;
+	justify-content: center;
+}
+
+.books {
+	padding: 50px 0;
+	display:flex;
+	flex-direction: column;
+	align-items:center;
+}
+
+.books .title {
+	color: #272a2a;
+	font-weight: 700;
+	font-size: 40px;
+	margin-bottom: 0px;
+}
+.books h2 {
+	padding-bottom: 40px;
+	color: #575e5e;
+	font-weight:100;
+	font-size:15px;
+
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-flow: wrap;
+	width:100%;
+}
+
+.card {
+	min-width: 20%;
+	max-width:23%;
+	background: #fff;
+	border: 1px solid #ccc;
+	margin-bottom: 50px;
+	transition: 0.3s;
+}
+
+.card-header {
+	text-align: center;
+	padding: 50px 10px;
+	background: linear-gradient(to right, #c71941, #d31616);
+	color: #fff;
+	font-size: 11px;
+}
+
+.card-body {
+	padding: 15px 31px;
+	text-align: center;
+	font-size: 16px;
+}
+
+.card-body h3{
+	display:flex;
+	align-self: flex-start;
+	padding-bottom: 10px;
+	font-weight: 100;
+	font-family:fantasy;
+	letter-spacing: 0.5px;
+}
+.card-body p{
+	display:flex;
+	align-self: flex-start;
+	font-family:math;
+	text-align: justify;
+}
+
+
+
+.card:hover {
+	transform: scale(1.05);
+	box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.25);
+}
+
+.card .card-footer {
+	padding-top: 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	justify-self: flex-end;
+}
+.card .card-footer .footer-item{
+	display:flex;
+	color: #4d4d4d;
+	
+}
+
+.card .card-footer .price i{
+	color: #00c632;
+	padding-right: 4px;
+}
+
+.card .card-footer .available i {
+	color: #ffa448;
+	padding-right: 4px;
+	
+}
+
+.card .card-footer span {
+	display: flex;
+	align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+	.card {
+		width: 40%;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.container {
+		width: 100%;
+	}
+	.card {
+		width: 80%;
+	}
+}

@@ -1,0 +1,32 @@
+/* table-section */
+body {
+	background: #f2f8ff;
+}
+
+.table-section {
+	display: flex;
+	justify-content: center;
+}
+
+.title {
+	padding-top: 20px;
+}
+
+.table {
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.heading {
+	color: #0c081be0;
+	font-weight: 200 !important;
+	margin: 15px 0px -23px 0px !important;
+	text-align: right;
+	font-size: larger;
+}
+
+.navbar {
+	background-color: #FF3CAC;
+	background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+	height: 45px;
+}
