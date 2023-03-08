@@ -64,8 +64,13 @@ public class BookController {
 	}
 	
 	@PutMapping("/editbook/{id}")
-	public String editBook(@ModelAttribute Book newBook)
+	public String editBook(@PathVariable("id") int id,@ModelAttribute Book newBook)
 	{
+		Book book = service.getBookById(id);
+		
+		newBook.setAvailable(book.isAvailable());
+		newBook.setCustomerEmail(book.getCustomerEmail());
+		
 		service.updateBook(newBook);
 		return "redirect:/adminhome";
 	}

@@ -95,7 +95,8 @@ public class CustomerService implements CustomerServiceInterf {
 			
 			repo.save(newCustomer);			
 		}
-		else {			
+		else {
+			
 			throw new CustomerDBException("Customer Doesn't Exist!");
 		}
 	}

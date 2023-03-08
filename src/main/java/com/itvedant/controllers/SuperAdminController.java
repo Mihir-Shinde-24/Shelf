@@ -13,13 +13,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.itvedant.models.Admin;
+import com.itvedant.models.Book;
+import com.itvedant.models.Customer;
 import com.itvedant.services.AdminServiceInterf;
+import com.itvedant.services.BookServiceInterf;
+import com.itvedant.services.CustomerServiceInterf;
 
 @Controller
 public class SuperAdminController {
 
 	@Autowired
 	AdminServiceInterf service;
+	
+	@Autowired
+	BookServiceInterf bookService;
+	
+	@Autowired
+	CustomerServiceInterf customerService;
 
 	/* Web Page Mapping */
 
@@ -28,6 +38,8 @@ public class SuperAdminController {
 	{
 		Admin admin = new Admin();
 		model.addAttribute("admin", admin);
+		
+		
 
 		return "registeradmin.html";
 	}
@@ -37,6 +49,13 @@ public class SuperAdminController {
 	{
 		List<Admin> admins = service.getAdmins();
 		model.addAttribute("admins", admins);
+		
+		List<Customer> customers = customerService.getCustomers();
+		List<Book> books = bookService.getBooks();
+		
+		model.addAttribute("customers",customers);
+		model.addAttribute("books",books);
+		
 		return "superhome.html";
 	}
 

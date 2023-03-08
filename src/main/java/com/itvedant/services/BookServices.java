@@ -1,10 +1,12 @@
 package com.itvedant.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itvedant.exceptions.BookDBException;
 import com.itvedant.models.Book;
 import com.itvedant.repositories.BookRepo;
 
@@ -38,7 +40,15 @@ public class BookServices implements BookServiceInterf{
 	@Override
 	public void deleteBook(int id)
 	{
-		repo.deleteById(id);		
+		Optional<Book> book = repo.findById(id);
+		if(book.get().isAvailable())
+		{
+			repo.deleteById(id);					
+		}
+		else {			
+			throw new BookDBException("Book Can Not to deleted! Customer Owns it.");
+		}
+		
 	}
 
 	@Override
